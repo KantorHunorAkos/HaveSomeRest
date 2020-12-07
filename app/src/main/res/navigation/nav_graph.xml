@@ -25,5 +25,9 @@
         android:id="@+id/itemFragment"
         android:name="com.example.fragments.ItemFragment"
         android:label="fragment_item_list"
-        tools:layout="@layout/fragment_item_list" />
+        tools:layout="@layout/fragment_item_list" >
+        <action
+            android:id="@+id/action_itemFragment_to_profileFragment2"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

@@ -18,8 +18,6 @@ class SplashScreenFragment : Fragment(), CoroutineScope {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        launch {
-            delay(3000)
-        }
+        //TODO load data from database
     }
 }
