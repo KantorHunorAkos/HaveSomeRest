@@ -10,9 +10,7 @@ import com.example.havesomerest.R
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
-class SplashScreenFragment : Fragment(), CoroutineScope {
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + Job()
+class SplashScreenFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_splash_srceen, container, false)
     }

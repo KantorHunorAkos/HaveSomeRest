@@ -8,55 +8,50 @@ import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.example.data.Item
 import com.example.havesomerest.R
-import com.example.fragments.dummy.DummyContent
+import kotlinx.android.synthetic.main.fragment_item_list.*
 
 /**
  * A fragment representing a list of Items.
  */
 class ItemFragment : Fragment() {
 
-    private var columnCount = 1
+    private val exampleList = generateDummyList(500)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        arguments?.let {
-            columnCount = it.getInt(ARG_COLUMN_COUNT)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_item_list, container, false)
-
-        // Set the adapter
-        if (view is RecyclerView) {
-            with(view) {
-                layoutManager = when {
-                    columnCount <= 1 -> LinearLayoutManager(context)
-                    else -> GridLayoutManager(context, columnCount)
-                }
-                adapter = MyItemRecyclerViewAdapter(DummyContent.ITEMS)
-            }
-        }
-        return view
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_item_list, container, false)
     }
 
-    companion object {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-        // TODO: Customize parameter argument names
-        const val ARG_COLUMN_COUNT = "column-count"
+        list.apply{
+            list.adapter = MyItemRecyclerViewAdapter(exampleList)
+            list.layoutManager = LinearLayoutManager(context)
+        }
+    }
 
-        // TODO: Customize parameter initialization
-        @JvmStatic
-        fun newInstance(columnCount: Int) =
-            ItemFragment().apply {
-                arguments = Bundle().apply {
-                    putInt(ARG_COLUMN_COUNT, columnCount)
-                }
-            }
+    private fun generateDummyList(size:Int) : List<Item>
+    {
+        val list = ArrayList<Item>()
+
+        for (i in 0 until size)
+        {
+            val item = Item(R.drawable.ic_baseline_add_24,"Item $i", "Line 2")
+            list += item
+        }
+
+        return list
     }
 }

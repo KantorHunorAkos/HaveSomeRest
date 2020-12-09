@@ -5,15 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/splashScreenFragment">
     <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.example.fragments.SplashScreenFragment"
-        android:label="fragment_splash_srceen"
-        tools:layout="@layout/fragment_splash_srceen" >
-        <action
-            android:id="@+id/action_splashScreenFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.fragments.ProfileFragment"
         android:label="ProfileFragment" >
@@ -29,5 +20,17 @@
         <action
             android:id="@+id/action_itemFragment_to_profileFragment2"
             app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.fragments.SplashScreenFragment"
+        android:label="fragment_splash_srceen"
+        tools:layout="@layout/fragment_splash_srceen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_itemFragment"
+            app:destination="@id/itemFragment" />
     </fragment>
 </navigation>
