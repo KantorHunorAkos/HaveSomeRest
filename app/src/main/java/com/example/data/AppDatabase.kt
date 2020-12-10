@@ -3,7 +3,7 @@ package com.example.data
 import android.content.Context
 import androidx.room.*
 
-@Database(entities = arrayOf(User::class), version = 1)
+@Database(entities = [User::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun userDao(): UserDao
 
