@@ -3,9 +3,9 @@ package com.example.data
 import android.content.Context
 import androidx.room.*
 
-@Database(entities = arrayOf(User::class), version = 1)
+@Database(entities = [Restaurant::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
-    abstract fun userDao(): UserDao
+    abstract fun restDao(): RestDao
 
     companion object {
         @Volatile

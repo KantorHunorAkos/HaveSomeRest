@@ -6,42 +6,53 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextClock
 import android.widget.TextView
-import com.example.data.Item
+import androidx.cardview.widget.CardView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.example.data.Restaurant
+import com.example.data.User
 import com.example.havesomerest.R
+import kotlinx.android.synthetic.main.fragment_item.view.*
 
-class MyItemRecyclerViewAdapter(
-    private val values: List<Item>
-) : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
+class MyItemRecyclerViewAdapter() : RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder>() {
 
-    private val mOnClickListener: View.OnClickListener = View.OnClickListener {
-        Log.d("onclick of item", "Clicked!")
-    }
+    private var values: List<Restaurant> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.fragment_item, parent, false)
+        val view = LayoutInflater
+                            .from(parent.context)
+                            .inflate(R.layout.fragment_item, parent, false)
+
         return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = values[position]
-        holder.image.setImageResource(item.image)
-        holder.text1.text = item.text1
-        holder.text2.text = item.text2
 
-        with(holder.itemView) {
-            setOnClickListener(mOnClickListener)
+        holder.name.text = item.name
+        holder.address.text = item.address
+
+        holder.row.setOnClickListener {
+            val action = ListFragmentDirections.actionListFragmentToDetailFragment(item)
+            holder.itemView.findNavController().navigate(action)
         }
     }
 
     override fun getItemCount(): Int = values.size
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val image: ImageView = view.findViewById(R.id.image_view)
-        val text1: TextView = view.findViewById(R.id.text1)
-        val text2: TextView = view.findViewById(R.id.text2)
+        val img: ImageView = view.findViewById(R.id.imageView)
+        val name: TextView = view.findViewById(R.id.textViewName)
+        val address: TextView = view.findViewById(R.id.textViewAddress)
 
+        val row:ConstraintLayout = view.findViewById(R.id.rowLayout)
     }
 
+    fun setData(newValues: List<Restaurant>) {
+        values = newValues
+        notifyDataSetChanged()
+    }
 }
