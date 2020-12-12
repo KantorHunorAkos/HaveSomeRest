@@ -5,15 +5,16 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Restaurant::class], version = 1, exportSchema = false)
-abstract class AppDatabase : RoomDatabase() {
-    abstract fun restDao(): RestDao
+@Database(entities = [User::class,Favorites::class], version = 1, exportSchema = false)
+abstract class UserDatabase : RoomDatabase() {
+    abstract fun userDao(): UserDao
+    abstract fun favDao(): FavDao
 
     companion object {
         @Volatile
-        private  var INSTANCE: AppDatabase? = null
+        private  var INSTANCE: UserDatabase? = null
 
-        fun getDatabase(context: Context): AppDatabase{
+        fun getDatabase(context: Context): UserDatabase{
             val tempInstance = INSTANCE
             if(tempInstance != null){
                 return tempInstance
@@ -21,8 +22,8 @@ abstract class AppDatabase : RoomDatabase() {
             synchronized(this){
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    AppDatabase::class.java,
-                    "app_database"
+                    UserDatabase::class.java,
+                    "user_database"
                 ).build()
                 INSTANCE = instance
                 return instance

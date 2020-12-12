@@ -4,25 +4,29 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.example.data.AppDatabase
-import com.example.data.Repository
-import com.example.data.User
+import com.example.data.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class UserViewModel(application: Application) : AndroidViewModel(application){
-    /*val readAllData: LiveData<List<User>>
-    private val repository: Repository
+    val readAllUserData: LiveData<List<User>>
+    private val userRepo: UserRepo
+    val favorites: LiveData<List<Restaurant>>
+    val favRepo: FavRepo
 
     init {
-        val userDao = AppDatabase.getDatabase(application).userDao()
-        repository = Repository(userDao)
-        readAllData = repository.readAllData
+        val userDao = UserDatabase.getDatabase(application).userDao()
+        userRepo = UserRepo(userDao)
+        readAllUserData = userRepo.readAllData
+
+        val favDao = UserDatabase.getDatabase(application).favDao()
+        favRepo = FavRepo(1,favDao)
+        favorites = favRepo.readAllData
     }
 
     fun addUser(user: User){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addUser(user)
+            userRepo.addUser(user)
         }
-    }*/
+    }
 }

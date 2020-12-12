@@ -1,11 +1,11 @@
 package com.example.models
 
-import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.data.Repository
 import com.example.data.Restaurant
 import com.example.data.Restaurants
-import com.example.fragments.MyItemRecyclerViewAdapter
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
@@ -28,7 +28,7 @@ class MainViewModel(val repository: Repository) : ViewModel() {
         }
     }
 
-    fun getAllRestaurants(per_page:Int) {
+    fun getAllRestaurants(per_page:Int = 1411) {
         viewModelScope.launch {
             val response = repository.getAllRestaurants(per_page )
             mAllRestaurants.value = response
